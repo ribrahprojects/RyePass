@@ -2,11 +2,18 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>RyePass</title>
+    <script defer type="text/javascript" src="index.js"></script>
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
-    <h1>💖 Hello World!</h1>
+    <h1>💖 Hello World</h1>
     <p>Welcome to your Electron application.</p>
+    <form> 
+      <label for="Pass">Password: </label>
+      <input type="text" id="Pass" name="Pass"><br><br>
+      <input type="button" id="submitPass" value="Submit" onclick="passwordEntered()"><br><br>
+    </form>
+    <div id="passwordList"></div><br><br>
   </body>
 </html>
