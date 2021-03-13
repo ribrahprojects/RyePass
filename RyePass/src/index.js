@@ -69,15 +69,16 @@ function testCreateFile(website, username, password){
   //alert("start of testCreateFile");
   var fs = require('fs');
 
-  let entry = {
-    website: website,
-    username: username,
-    password: password
+  var entry = {
+    jsonwebsite: website,
+    jsonusername: username,
+    jsonpassword: password
   }
 
+  var data = JSON.stringify(entry);
   //alert("middle of testCreateFile");
 
-  fs.writeFile('./passwords/mynewfile1.txt', password, function (err) {
+  fs.writeFile('./passwords/mynewfile1.json', data, function (err) {
     if (err) {
       alert("failed");
     }
