@@ -7,13 +7,30 @@
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
-    <h1>💖 Hello World</h1>
-    <p>Welcome to your Electron application.</p>
+    <h1>Ryepass</h1>
+    <h2>Password Storage</h2>
     <form> 
-      <label for="Pass">Password: </label>
-      <input type="text" id="Pass" name="Pass"><br><br>
+      <label for="website">Website: </label>
+      <input type="text" id="website" name="website"><br><br>
+      <label for="username">Username: </label>
+      <input type="text" id="username" name="username"><br><br>
+      <label for="password">Password: </label>
+      <input type="text" id="password" name="password"><br><br>
       <input type="button" id="submitPass" value="Submit" onclick="passwordEntered()"><br><br>
     </form>
-    <div id="passwordList"></div><br><br>
+    <div id="passwordList"></div><br>
+
+    <hr>
+
+    <h2>Password Display</h2>
+    <ul id = "list">
+
+    </ul>
+
+
+    <hr>
+
+    <h2>Password Generation</h2>
+
   </body>
 </html>

@@ -51,23 +51,33 @@ app.on('activate', () => {
 
 
 function passwordEntered(){
-  var input = document.getElementById("Pass").value;
-  updatePasswords(input);
+  var website = document.getElementById("website").value;
+  var username = document.getElementById("username").value;
+  var password = document.getElementById("password").value;
+
+  updatePasswords(website, username, password);
 }
 
-function updatePasswords(input){
-  document.getElementById("passwordList").innerHTML = input;
-  testCreateFile();
+function updatePasswords(website, username, password){
+  //document.getElementById("passwordList").innerHTML = input;
+  testCreateFile(website, username, password);
 }
 
 //This next section is used for functions relating to the writing, reading, 
 //and storing of local files on the PC
-function testCreateFile(){
-  alert("start of testCreateFile");
+function testCreateFile(website, username, password){
+  //alert("start of testCreateFile");
   var fs = require('fs');
-  alert("middle of testCreateFile");
 
-  fs.appendFile('mynewfile1.txt', 'Hello content!', function (err) {
+  let entry = {
+    website: website,
+    username: username,
+    password: password
+  }
+
+  //alert("middle of testCreateFile");
+
+  fs.writeFile('./passwords/mynewfile1.txt', password, function (err) {
     if (err) {
       alert("failed");
     }
@@ -75,6 +85,6 @@ function testCreateFile(){
       alert('Saved!');
     }
   });
-  fs.appendFile();
-  alert("end of testCreateFile");
+  
+  //alert("end of testCreateFile");
 }
