@@ -70,9 +70,9 @@ function testCreateFile(website, username, password){
   var fs = require('fs');
 
   var entry = {
-    jsonwebsite: website,
-    jsonusername: username,
-    jsonpassword: password
+    new_website: website,
+    new_username: username,
+    new_password: password
   }
 
   var data = JSON.stringify(entry);
@@ -86,6 +86,12 @@ function testCreateFile(website, username, password){
       alert('Saved!');
     }
   });
-  
+  document.getElementById('passwordlist').innerHTML += ('<li>'+data+'</li>');
   //alert("end of testCreateFile");
+
+  var JSONdb = require('simple-json-db');
+  var db = new JSONdb('./passwords/passwords.json');
+  db.set('1', entry);
+
 }
+
