@@ -48,6 +48,9 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 function passwordEntered(){
@@ -66,8 +69,10 @@ function updatePasswords(website, username, password){
 //This next section is used for functions relating to the writing, reading, 
 //and storing of local files on the PC
 function testCreateFile(website, username, password){
-  //alert("start of testCreateFile");
-  var fs = require('fs');
+  document.getElementById('passwordlist').innerHTML = ('');
+
+  var JSONdb = require('simple-json-db');
+  var db = new JSONdb('./passwords/passwords.json');
 
   var entry = {
     new_website: website,
@@ -75,23 +80,24 @@ function testCreateFile(website, username, password){
     new_password: password
   }
 
-  var data = JSON.stringify(entry);
-  //alert("middle of testCreateFile");
 
-  fs.writeFile('./passwords/mynewfile1.json', data, function (err) {
-    if (err) {
-      alert("failed");
-    }
-    else{
-      alert('Saved!');
-    }
-  });
-  document.getElementById('passwordlist').innerHTML += ('<li>'+data+'</li>');
-  //alert("end of testCreateFile");
+  var set = 0;
+  db.set(set, entry);
 
-  var JSONdb = require('simple-json-db');
-  var db = new JSONdb('./passwords/passwords.json');
-  db.set('1', entry);
+  //var currentEntry = JSON.stringify(db.get(0));
+  //document.getElementById('passwordlist').innerHTML += ('<li>'+currentEntry+'</li>');
+
+  var i = 0;
+  var stop = false;
+  while (stop == false){
+    if (db.has(i)){
+      var currentEntry = JSON.stringify(db.get(i));
+      document.getElementById('passwordlist').innerHTML += ('<li>'+currentEntry+'</li>');
+      i++;
+    }
+    else{stop = true;}
+  }
+  
 
 }
 
