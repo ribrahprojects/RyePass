@@ -113,3 +113,28 @@ function testCreateFile(website, username, password, name){
 
 }
 
+function generatePassword(){
+
+  document.getElementById('newPassword').innerHTML = '';
+
+  var length = document.getElementById("length").value;
+  var upper = document.getElementById("upper").checked;
+  var lower = document.getElementById("lower").checked;
+  var numbers = document.getElementById("number").checked;
+  var symbols = document.getElementById("symbol").checked;
+  var newPass = '';
+  var result = []
+
+  var characters = '';
+  var characterlength = 0;
+  if (upper == true){characters += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; characterlength += 26;}
+  if (lower == true){characters += 'abcdefghijklmnopqrstuvwxyz'; characterlength += 26;}
+  if (numbers == true){characters += '1234567890'; characterlength += 10;}
+  if (symbols == true){characters += '!@#$%^&*()/.,'; characterlength += 14;}
+
+  for(var i = 0 ; i<length ; i++){
+    result.push(characters.charAt(Math.floor(Math.random() * characterlength)));
+   }
+  newPass = result.join('');
+  document.getElementById('newPassword').innerHTML += newPass;
+}
