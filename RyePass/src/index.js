@@ -97,6 +97,10 @@ function testCreateFile(website, username, password){
     }
     else{stop = true;}
   }
+  //alert(JSON.stringify(db.JSON()));
+
+  document.getElementById('passwordJSON').innerHTML += (JSON.stringify(db.JSON()));
+
   
 
 }
