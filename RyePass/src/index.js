@@ -54,22 +54,32 @@ app.on('activate', () => {
 
 
 function passwordEntered(){
+  var name = document.getElementById("name").value;
   var website = document.getElementById("website").value;
   var username = document.getElementById("username").value;
   var password = document.getElementById("password").value;
 
-  updatePasswords(website, username, password);
+  updatePasswords(website, username, password, name);
 }
 
-function updatePasswords(website, username, password){
+function updatePasswords(website, username, password, name){
   //document.getElementById("passwordList").innerHTML = input;
-  testCreateFile(website, username, password);
+  var JSONdb = require('simple-json-db');
+  var db = new JSONdb('./passwords/passwords.json');
+  if (db.has(name)){
+    alert("this name already exists, try another");
+  }
+  else {
+    testCreateFile(website, username, password, name);
+  }
 }
 
 //This next section is used for functions relating to the writing, reading, 
 //and storing of local files on the PC
-function testCreateFile(website, username, password){
+function testCreateFile(website, username, password, name){
   document.getElementById('passwordlist').innerHTML = ('');
+  document.getElementById('passwordJSON').innerHTML = ('');
+
 
   var JSONdb = require('simple-json-db');
   var db = new JSONdb('./passwords/passwords.json');
@@ -80,8 +90,7 @@ function testCreateFile(website, username, password){
     new_password: password
   }
 
-
-  var set = 0;
+  var set = name;
   db.set(set, entry);
 
   //var currentEntry = JSON.stringify(db.get(0));
@@ -98,7 +107,6 @@ function testCreateFile(website, username, password){
     else{stop = true;}
   }
   //alert(JSON.stringify(db.JSON()));
-
   document.getElementById('passwordJSON').innerHTML += (JSON.stringify(db.JSON()));
 
   
