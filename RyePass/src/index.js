@@ -109,8 +109,6 @@ function testCreateFile(website, username, password, name){
   //alert(JSON.stringify(db.JSON()));
   document.getElementById('passwordJSON').innerHTML += (JSON.stringify(db.JSON()));
 
-  
-
 }
 
 function generatePassword(){
@@ -137,4 +135,14 @@ function generatePassword(){
    }
   newPass = result.join('');
   document.getElementById('newPassword').innerHTML += newPass;
+}
+
+function deleteAllPasswords(){
+  var JSONdb = require('simple-json-db');
+  var db = new JSONdb('./passwords/passwords.json');
+  db.deleteAll();
+}
+
+function updatePasswordDisplay(){
+  
 }
