@@ -78,8 +78,6 @@ function updatePasswords(website, username, password, name){
 //and storing of local files on the PC
 function testCreateFile(website, username, password, name){
   document.getElementById('passwordlist').innerHTML = ('');
-  document.getElementById('passwordJSON').innerHTML = ('');
-
 
   var JSONdb = require('simple-json-db');
   var db = new JSONdb('./passwords/passwords.json');
@@ -93,21 +91,7 @@ function testCreateFile(website, username, password, name){
   var set = name;
   db.set(set, entry);
 
-  //var currentEntry = JSON.stringify(db.get(0));
-  //document.getElementById('passwordlist').innerHTML += ('<li>'+currentEntry+'</li>');
-
-  var i = 0;
-  var stop = false;
-  while (stop == false){
-    if (db.has(i)){
-      var currentEntry = JSON.stringify(db.get(i));
-      document.getElementById('passwordlist').innerHTML += ('<li>'+currentEntry+'</li>');
-      i++;
-    }
-    else{stop = true;}
-  }
-  //alert(JSON.stringify(db.JSON()));
-  document.getElementById('passwordJSON').innerHTML += (JSON.stringify(db.JSON()));
+  updatePasswordDisplay();
 
 }
 
@@ -121,7 +105,7 @@ function generatePassword(){
   var numbers = document.getElementById("number").checked;
   var symbols = document.getElementById("symbol").checked;
   var newPass = '';
-  var result = []
+  var result = [];
 
   var characters = '';
   var characterlength = 0;
@@ -141,8 +125,28 @@ function deleteAllPasswords(){
   var JSONdb = require('simple-json-db');
   var db = new JSONdb('./passwords/passwords.json');
   db.deleteAll();
+  updatePasswordDisplay();
 }
 
 function updatePasswordDisplay(){
-  
+  var JSONdb = require('simple-json-db');
+  var db = new JSONdb('./passwords/passwords.json');
+
+  document.getElementById('passwordJSON').innerHTML = ('');
+  document.getElementById('passwordJSON').innerHTML += (JSON.stringify(db.JSON()));
+
+  //MAYBE SHOULD SWAP TO THIS USE OF DISPLAYING PASSWORDS ONE AT A TIME INSTEAD OF ALL AT ONCE
+  /************************************************************************************************
+  var i = 0;
+  var stop = false;
+  while (stop == false){
+    if (db.has(i)){
+      var currentEntry = JSON.stringify(db.get(i));
+      document.getElementById('passwordlist').innerHTML += ('<li>'+currentEntry+'</li>');
+      i++;
+    }
+    else{stop = true;}
+  }
+  **************************************************************************************************/
+
 }
